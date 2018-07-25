@@ -1,6 +1,7 @@
 import {Modal} from "antd";
 class Com extends React.Component{
     constructor(){
+        super();
         this.simpleClass=Math.random().toString(36).substring(2);
         this.init=false;
     }
