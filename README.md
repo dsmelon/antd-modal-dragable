@@ -5,7 +5,7 @@
 
   1.dragable
 
-    类型boolean,是否可拖动，默认true
+    类型boolean,是否可拖动，默认true,开启此项后，首次位置水平方向不再居中，要手动设置初始位置
 
   2.limit
 
