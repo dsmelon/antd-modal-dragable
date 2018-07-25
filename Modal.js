@@ -6,6 +6,7 @@ class Com extends React.Component{
             style:props.style||{}
         }
         this.simpleClass=Math.random().toString(36).substring(2);
+        this.init=false;
     }
     move=event=>{
         const {top,left,right,bottom,width,height}=this.contain.getBoundingClientRect();
@@ -26,9 +27,21 @@ class Com extends React.Component{
         document.body.onselectstart=()=>true;
         this.removeMove();
     }
-    componentDidMount(){
+    toTop=()=>{
+        let autoIndexArr=document.getElementsByClassName("autoIndex");
+        if(autoIndexArr.length<1) return false;
+        let max=0;
+        for(let i=0;i<autoIndexArr.length;i++){
+            let zIndex=parseInt(autoIndexArr[i].style.zIndex||1000);
+            if(zIndex>max) max=zIndex;
+        }
+        this.contain.style.zIndex=max+1;
+    }
+    create=(visible)=>{
+        if(this.init) return false;
         const {title,dragable=true,limit=false,autoIndex=true}=this.props;
-        if(title&&dragable){
+        if(title&&dragable&&visible){
+            this.init=true;
             setTimeout(() => {
                 this.contain=document.getElementsByClassName(this.simpleClass)[0];
                 if(!autoIndex){
@@ -39,14 +52,8 @@ class Com extends React.Component{
                     this.contain.style.right="auto";
                     this.contain.style.overflow="visible";
                     this.contain.style.bottom="auto";
-                    this.contain.addEventListener("mousedown",()=>{
-                        let autoIndexArr=document.getElementsByClassName("autoIndex");
-                        if(autoIndexArr.length<1) return false;
-                        for(let i=0;i<autoIndexArr.length;i++){
-                            autoIndexArr[i].style.zIndex=1000;
-                        }
-                        this.contain.style.zIndex=1001;
-                    },false)
+                    this.contain.addEventListener("mousedown",this.toTop,false);
+                    this.toTop();
                 }
                 this.header=this.contain.getElementsByClassName("ant-modal-header")[0];
                 this.header.style.cursor="all-scroll";
@@ -57,6 +64,15 @@ class Com extends React.Component{
                 window.addEventListener("mouseup",this.removeUp,false);
             },0);
         }
+    }
+    componentDidMount(){
+        this.create(this.props.visible);
+    }
+    componentWillReceiveProps({visible}){
+        if(visible&&(visible!==this.props.visible)){
+            this.create(visible);
+            this.contain&&this.toTop();
+        };
     }
     componentWillUnmount(){
         this.removeMove();
@@ -81,4 +97,3 @@ class Com extends React.Component{
     }
 }
 export default Com;
-
