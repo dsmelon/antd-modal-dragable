@@ -1,5 +1,4 @@
 import {Modal} from "antd";
-
 class Com extends React.Component{
     constructor(props){
         super(props);
@@ -24,7 +23,6 @@ class Com extends React.Component{
         window.removeEventListener("mousemove",this.move,false);
     }
     removeUp=()=>{
-        console.log("aaa")
         document.body.onselectstart=()=>true;
         this.removeMove();
     }
@@ -57,7 +55,6 @@ class Com extends React.Component{
                     window.addEventListener("mousemove",this.move,false);
                 }
                 window.addEventListener("mouseup",this.removeUp,false);
-
             },0);
         }
     }
