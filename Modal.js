@@ -1,10 +1,6 @@
 import {Modal} from "antd";
 class Com extends React.Component{
-    constructor(props){
-        super(props);
-        this.state={
-            style:props.style||{}
-        }
+    constructor(){
         this.simpleClass=Math.random().toString(36).substring(2);
         this.init=false;
     }
