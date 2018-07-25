@@ -1,7 +1,7 @@
 # antd-modal-dragable
 在蚂蚁金服的antd库的modal组件上，新增可拖动功能，完全复用antd-modal的全部api，支持同时打开多个窗口
 
-- 新增以下三个api
+  新增以下三个api
 
   1.dragable
 
