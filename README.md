@@ -9,7 +9,7 @@
 
   2.limit
 
-    类型boolean,是否限制不能移出屏幕，默认true
+    类型boolean,是否限制不能移出屏幕，默认false
 
   3.autoIndex
 
