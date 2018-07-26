@@ -36,19 +36,21 @@ class Com extends React.Component{
     }
     create=(visible)=>{
         if(this.init) return false;
-        const {title,dragable=true,limit=false,autoIndex=true}=this.props;
+        const {title,dragable=true,limit=false,autoIndex=true,style={}}=this.props;
         if(title&&dragable&&visible){
             this.init=true;
             setTimeout(() => {
                 this.contain=document.getElementsByClassName(this.simpleClass)[0];
                 if(!autoIndex){
-                    this.contain=this.contain.getElementsByClassName("ant-modal ")[0];
+                    this.contain=this.contain.getElementsByClassName("ant-modal")[0];
                     this.contain.style.paddingBottom=0;
                     this.contain.style.display="inline-block";
                 }else{
                     this.contain.style.right="auto";
                     this.contain.style.overflow="visible";
                     this.contain.style.bottom="auto";
+                    this.contain.style.left=typeof(style.left)==="number"?style.left+"px":style.left;
+                    this.contain.style.top=typeof(style.top)==="number"?style.top+"px":style.top;
                     this.contain.addEventListener("mousedown",this.toTop,false);
                     this.toTop();
                 }
@@ -94,3 +96,4 @@ class Com extends React.Component{
     }
 }
 export default Com;
+
